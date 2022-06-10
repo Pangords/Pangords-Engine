@@ -1,1 +1,2 @@
-
+* linguist-vendored
+*.glsl linguist-vendored=false
