@@ -19,10 +19,5 @@ namespace PangordsEngine.Shaders
         {
             return new Shader(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Shaders\vSkyboxShader.glsl", Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Shaders\fSkyboxShader.glsl");
         }
-
-        public static Shader CustomShader(string vertexShaderPath, string fragmentShaderPath)
-        {
-            return new Shader(vertexShaderPath, fragmentShaderPath);
-        }
     }
 }
