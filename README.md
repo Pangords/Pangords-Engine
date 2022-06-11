@@ -8,6 +8,6 @@ Pangords Engine does not include an editor, which means it is code-only. Its eas
 - Windows
 
 ## Documentation
-
+Check out the [documentation](https://github.com/Pangords/Pangords-Engine/wiki)!
 
 # This project is still a prototype! It's still unstable and is not the final result!
