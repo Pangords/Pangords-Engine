@@ -1,20 +1,23 @@
-﻿namespace PangordsEngine.Shaders
+﻿using System;
+using System.IO;
+
+namespace PangordsEngine.Shaders
 {
     class ShaderUtility
     {
         public static Shader UnlitShader()
         {
-            return new Shader(@"D:\Dev\PangordsEngine\Shaders\vUnlitShader.glsl", @"D:\Dev\PangordsEngine\Shaders\fUnlitShader.glsl");
+            return new Shader(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Shaders\vUnlitShader.glsl", Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Shaders\fUnlitShader.glsl");
         }
 
         public static Shader LitShader()
         {
-            return new Shader(@"D:\Dev\PangordsEngine\Shaders\vLitShader.glsl", @"D:\Dev\PangordsEngine\Shaders\fLitShader.glsl");
+            return new Shader(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Shaders\vLitShader.glsl", Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Shaders\fLitShader.glsl");
         }
 
         public static Shader SkyboxShader()
         {
-            return new Shader(@"D:\Dev\PangordsEngine\Shaders\vSkyboxShader.glsl", @"D:\Dev\PangordsEngine\Shaders\fSkyboxShader.glsl");
+            return new Shader(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Shaders\vSkyboxShader.glsl", Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Shaders\fSkyboxShader.glsl");
         }
 
         public static Shader CustomShader(string vertexShaderPath, string fragmentShaderPath)
