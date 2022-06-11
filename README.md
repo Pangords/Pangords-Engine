@@ -9,3 +9,5 @@ Pangords Engine uses a library called GLFW that supports pretty much any input d
 
 ## Currently supported platforms
 - Windows
+
+# This project is still a prototype! It's still unstable and is not the final result!
