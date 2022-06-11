@@ -3,6 +3,9 @@ using System.IO;
 
 namespace PangordsEngine.Shaders
 {
+    /// <summary>
+    /// This class manages built-in shaders.
+    /// </summary>
     class ShaderUtility
     {
         public static Shader UnlitShader()
