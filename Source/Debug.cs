@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PangordsEngine
 {
@@ -10,7 +6,7 @@ namespace PangordsEngine
     {
         public static void Log(object message)
         {
-            Console.WriteLine((string)message);
+            Console.WriteLine(message.ToString());
         }
     }
 }

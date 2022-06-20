@@ -27,4 +27,8 @@
 	  <PackageReference Include="AssimpNet" Version="4.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Assets\Skybox\" />
+  </ItemGroup>
+
 </Project>

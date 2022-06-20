@@ -44,7 +44,7 @@ struct SpotLight {
     sampler2D cookie;
 };
 
-#define MAX_NUM_TOTAL_LIGHTS 100
+#define MAX_NUM_TOTAL_LIGHTS 10
 
 in vec3 FragPos;
 in vec3 Normal;
@@ -56,6 +56,9 @@ uniform vec3 viewPos;
 uniform DirLight dirLight;
 uniform PointLight pointLights[MAX_NUM_TOTAL_LIGHTS];
 uniform SpotLight spotLight;
+uniform int hasDirLight = 0;
+uniform int hasPointLight = 0;
+uniform int hasSpotLight = 0;
 uniform Material material;
 
 // function prototypes
@@ -80,13 +83,22 @@ void main()
     vec3 norm = normalize(Normal);
     vec3 viewDir = normalize(viewPos - FragPos);
     
+    vec3 result;
+
     // phase 1: directional lighting
-    vec3 result = CalcDirLight(dirLight, norm, viewDir);
+    if (hasDirLight == 1)
+        result = CalcDirLight(dirLight, norm, viewDir);
+
     // phase 2: point lights
-    for(int i = 0; i < nrOfPointLights; i++)
-        result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);
+    if (hasPointLight == 1)
+    {
+        for(int i = 0; i < nrOfPointLights; i++)
+            result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);
+    }
+
     // phase 3: spot light
-    result += CalcSpotLight(spotLight, norm, FragPos, viewDir);    
+    if (hasSpotLight == 1)
+        result += CalcSpotLight(spotLight, norm, FragPos, viewDir);    
 
     FragColor = vec4(result, 1.0);
 }

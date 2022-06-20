@@ -21,7 +21,7 @@ namespace PangordsEngine
         }
 
         // model data
-        List<Mesh> meshes = new List<Mesh>();
+        public List<Mesh> meshes = new List<Mesh>();
         string directory = "";
 
         public void LoadModel(string path)
@@ -35,9 +35,7 @@ namespace PangordsEngine
                 return;
             }
 
-            //directory = path.Remove(path.LastIndexOf(@"\"));
             directory = path.Substring(0, path.LastIndexOf(@"\"));
-            Console.WriteLine(directory);
 
             ProcessNode(scene.RootNode, scene);
         }
@@ -56,6 +54,7 @@ namespace PangordsEngine
                 ProcessNode(node.Children[i], scene);
             }
         }
+
         Mesh ProcessMesh(Assimp.Mesh mesh, Scene scene)
         {
             List<Vertex> vertices = new List<Vertex>();
@@ -113,7 +112,7 @@ namespace PangordsEngine
                     indices.Add((uint)face.Indices[j]);        
             }
             // process materials
-            Material material = scene.Materials[mesh.MaterialIndex];
+            Assimp.Material material = scene.Materials[mesh.MaterialIndex];
             // we assume a convention for sampler names in the shaders. Each diffuse texture should be named
             // as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER. 
             // Same applies to other texture as the following list summarizes:
@@ -160,7 +159,7 @@ namespace PangordsEngine
             return new Mesh(vertices, indices, textures);
         }  
 
-        List<Texture> LoadMaterialTextures(Material mat, Assimp.TextureType type, string typeName)
+        List<Texture> LoadMaterialTextures(Assimp.Material mat, Assimp.TextureType type, string typeName)
         {
             List<Texture> textures = new List<Texture>();
 
@@ -182,9 +181,8 @@ namespace PangordsEngine
 
                 if (!skip && slot.FilePath != null)
                 {
-                    Console.WriteLine(slot.FilePath);
                     string dir = directory + @"\" + slot.FilePath;
-                    Console.WriteLine(dir);
+                    Debug.Log("Texture loaded");
                     uint id = Texture.LoadTexture(dir, true, 0);
                     Texture texture = new Texture(id, typeName, slot.FilePath);
                     textures.Add(texture);

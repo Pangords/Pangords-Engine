@@ -1,9 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PangordsEngine
 {
     class Game
     {
+        public static List<Entity> entities = new();
+        
+        public static Entity SpawnEntity<T>() where T : Entity, new()
+        {
+            Entity entity = new Entity();
+            entities.Add(entity);
+            return entity;
+        }
+
         // Is called when the game starts
         public static void Start()
         {
@@ -19,7 +29,7 @@ namespace PangordsEngine
         // Is called when a window is first displayed
         public static void OnWindowDisplay()
         {
-            Console.WriteLine("Window rendered!");
+            Console.WriteLine("Window displayed!");
         }
     }
 }

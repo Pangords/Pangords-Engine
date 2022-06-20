@@ -8,11 +8,13 @@ namespace PangordsEngine.Shaders
     {
         public uint ID;
 
+        public string vertexCode;
+        public string fragmentCode;
+
+        public Shader() { }
+
         public Shader(string vertexPath, string fragmentPath)
         {
-            string vertexCode = "";
-            string fragmentCode = "";
-
             try
             {
                 if (File.Exists(vertexPath))
@@ -25,7 +27,7 @@ namespace PangordsEngine.Shaders
                     fragmentCode = File.ReadAllText(fragmentPath);
                 }
             }
-            catch(System.Exception _ex)
+            catch(Exception _ex)
             {
                 Console.WriteLine("Failed to load shader: " + _ex);
             }
@@ -50,14 +52,15 @@ namespace PangordsEngine.Shaders
             glDeleteShader(fragment);
         }
 
+        public void CopyShader(Shader shader)
+        {
+            vertexCode = shader.vertexCode;
+            fragmentCode = shader.fragmentCode;
+        }
+
         public void Use()
         {
             glUseProgram(ID);
-        }
-
-        public void SetBool(string name, bool value)
-        {
-            
         }
 
         public void SetInt(string name, int value)

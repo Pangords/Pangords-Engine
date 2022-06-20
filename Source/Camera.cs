@@ -35,8 +35,8 @@ namespace PangordsEngine
 
         public Camera(Vector3 position)
         {
-            transform.position = position;
-            transform.eulerAngles = new Vector3(YAW, PITCH, transform.eulerAngles.z);
+            transform.Position = position;
+            transform.EulerAngles = new Vector3(YAW, PITCH, transform.EulerAngles.z);
 
             MovementSpeed = SPEED;
             MouseSensitivity = SENSITIVITY;
@@ -50,7 +50,7 @@ namespace PangordsEngine
         // returns the view matrix calculated using Euler Angles and the LookAt Matrix
         public Matrix4x4 GetViewMatrix()
         {
-            return Mathf.LookAt(transform.position, transform.position + Front, Up);
+            return Mathf.LookAt(transform.Position, transform.Position + Front, Up);
         }
 
         // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
@@ -58,13 +58,13 @@ namespace PangordsEngine
         {
             float velocity = MovementSpeed * deltaTime;
             if (direction == CameraMovement.Forward)
-                transform.position += Front * velocity;
+                transform.Position += Front * velocity;
             if (direction == CameraMovement.Backward)
-                transform.position -= Front * velocity;
+                transform.Position -= Front * velocity;
             if (direction == CameraMovement.Left)
-                transform.position -= Right * velocity;
+                transform.Position -= Right * velocity;
             if (direction == CameraMovement.Right)
-                transform.position += Right * velocity;
+                transform.Position += Right * velocity;
         }
 
         // processes input received from a mouse input system. Expects the offset value in both the x and y direction.
@@ -73,16 +73,15 @@ namespace PangordsEngine
             xoffset *= MouseSensitivity;
             yoffset *= MouseSensitivity;
 
-            transform.eulerAngles.x += xoffset;
-            transform.eulerAngles.y += yoffset;
+            transform.EulerAngles += new Vector3(xoffset, yoffset, 0f);
 
             // make sure that when pitch is out of bounds, screen doesn't get flipped
             if (constrainPitch)
             {
-                if (transform.eulerAngles.y > 89.0f)
-                    transform.eulerAngles.y = 89.0f;
-                if (transform.eulerAngles.y < -89.0f)
-                    transform.eulerAngles.y = -89.0f;
+                if (transform.EulerAngles.y > 89.0f)
+                    transform.EulerAngles = new Vector3(transform.EulerAngles.x, 89.0f, transform.EulerAngles.z);
+                if (transform.EulerAngles.y < -89.0f)
+                    transform.EulerAngles = new Vector3(transform.EulerAngles.x, -89.0f, transform.EulerAngles.z);
             }
 
             // update Front, Right and Up Vectors using the updated Euler angles
@@ -103,11 +102,8 @@ namespace PangordsEngine
         public void UpdateCameraVectors()
         {
             // calculate the new Front vector
-            Vector3 front;
-            front.x = Mathf.Cos(Mathf.DegreesToRadians(transform.eulerAngles.x)) * Mathf.Cos(Mathf.DegreesToRadians(transform.eulerAngles.y));
-            front.y = Mathf.Sin(Mathf.DegreesToRadians(transform.eulerAngles.y));
-            front.z = Mathf.Sin(Mathf.DegreesToRadians(transform.eulerAngles.x)) * Mathf.Cos(Mathf.DegreesToRadians(transform.eulerAngles.y));
-            Front = Mathf.Normalize(front);
+            Front = transform.Front;
+
             // also re-calculate the Right and Up vector
             Right = Mathf.Normalize(Mathf.Cross(Front, Vector3.Up));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
             Up = Mathf.Normalize(Mathf.Cross(Right, Front));

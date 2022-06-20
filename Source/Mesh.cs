@@ -97,7 +97,6 @@ namespace PangordsEngine
             glActiveTexture(GL_TEXTURE0);
         }
 
-
         //  render data
         private uint VBO, EBO;
 
