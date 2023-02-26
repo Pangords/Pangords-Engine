@@ -1,8 +1,6 @@
 # Pangords-Engine
 ## What is it?
-It is a C# game engine that uses OpenGL for rendering and supports 2D and 3D graphics.
-
-Pangords Engine does not include an editor, which means it is code-only. Its easy to understand architecture allows users to easily create games.
+This is a 2D and 3D game engine that I'm working on to learn more about OpenGL. It is written in C# and code is not perfectly written and organized.
 
 ## Currently supported platforms
 - Windows
@@ -10,4 +8,4 @@ Pangords Engine does not include an editor, which means it is code-only. Its eas
 ## Documentation
 Check out the [documentation](https://github.com/Pangords/Pangords-Engine/wiki)!
 
-# This project is still a prototype! It's still unstable and is not the final result!
+# WARNING! This project is still a prototype
